@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import br.com.alura.enviadorEmail.EmailService;
 import br.com.alura.listavip.model.Convidado;
 import br.com.alura.listavip.repository.ConvidadoRepository;
 
@@ -39,6 +40,8 @@ public class ConvidadoController {
 
 		Convidado novoConvidado = new Convidado(nome, email, telefone);
 		repository.save(novoConvidado); // salva no bd
+
+		new EmailService().enviar(nome, email); // uilizando o jar enviadorEmail
 
 		Iterable<Convidado> convidados = repository.findAll();
 		model.addAttribute("convidados", convidados); // recarrega a lista de convidados ao salvar o novo convidado

@@ -7,9 +7,23 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-			<version>1.3.6.RELEASE</version>
+	    <groupId>org.springframework.boot</groupId>
+	    <artifactId>spring-boot-starter-web</artifactId>
+	    <version>1.4.2.RELEASE</version>
+	
+	    <exclusions>
+	        <exclusion>
+	            <groupId>org.springframework.boot</groupId>
+	            <artifactId>spring-boot-starter-tomcat</artifactId>
+	        </exclusion>
+	    </exclusions>
+	
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-jetty</artifactId>
+		    <version>1.4.2.RELEASE</version>
 		</dependency>
 		
 		
@@ -37,10 +51,49 @@
 		    <artifactId>spring-boot-devtools</artifactId>
 		    <version>1.3.0.RELEASE</version>
 		</dependency>
-		    
+		
+		<dependency>
+    <groupId>br.com.alura.enviadorEmail</groupId>
+    <artifactId>enviadorEmail</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+</dependency>
+		
+		<!-- Spring Actuator fornece endpoints onde VERIFICAMOS algumas informações em tempo de execução da aplicação.  
+		http://localhost:9000/health
+		http://localhost:9000/beans
+		-->
+		
+		<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-actuator</artifactId>
+    <version>1.4.2.RELEASE</version>
+</dependency>
 
 		
 	</dependencies>
+	
+	<!-- O Maven executará a seguinte regra ao empacotar a aplicação (fatjat: app com container embutido)
+	limpeza na pasta target: mvn clean. 
+	mvn package ira gerar o fatjar
+	java -jar target/ListaVIP-0.0.1-SNAPSHOT 
+	 -->
+	
+	<build>
+    <plugins>
+        <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+            <version>1.4.2.RELEASE</version>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>repackage</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
 
 
 </project>
